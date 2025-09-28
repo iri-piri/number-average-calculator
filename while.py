@@ -7,25 +7,35 @@ def calculate_average():
     total_sum = 0
     count = 0
 
-    # Get first input from user
-    user_input = input("enter a number (-1 to finish): ")
+    while True:
+        try:
+            # Get first input from user
+            user_input = input("enter a number (-1 to finish): ")
 
-    # Continue until user enters -1
-    while user_input != "-1":
-        #Add the number to our running sum and increment count
-        total_sum += int(user_input)
-        count += 1
+            # Check if user wants to exit
+            if user_input == "-1":
+                break
 
-        # Get next number
-        user_input = input("enter a number (-1 to finish): ")
+            # Convert input to number and validate
+            number = float(user_input)  # Using float instead of int to accept decimal numbers
 
-    # Calculate and return average if possible
-    if count > 0:
-        average = total_sum / count
-        print (f"The average is: {average}")
-        return average
-    else:
-        print("No numbers were entered.")
+            # Add to running sum and increment count
+            total_sum += number
+            count += 1
+
+        except ValueError:
+            print("Error: Please entre a valid number.")
+        except Exception as e:
+            print(f"An unexpected error occured: {e}")
+
+        # Calculate and return average if possible
+        if count > 0:
+            average = total_sum / count
+            print (f"The average of the {count} number is: {average}")
+            return average
+        else:
+            print("No valid numbers were entered.")
+            return None
 
 # Execute the function if script is run directly
 if __name__ == "__main__":
